@@ -6,7 +6,7 @@ CREATE TABLE todo_categories(
     user_id TEXT NOT NULL,
     name TEXT NOT NULL,
     color TEXT DEFAULT '#6b7280',
-    description TEXT,
+    description TEXT
     
 );
 
@@ -36,8 +36,7 @@ CREATE TABLE todos(
     category_id UUID REFERENCES todo_categories,
     metadata JSONB,
     sort_order SERIAL
-    
-) 
+);
 
 CREATE INDEX idx_todos_user_id ON todos(user_id);
 CREATE INDEX idx_todos_category_id ON todos(category_id);
@@ -60,8 +59,8 @@ CREATE TABLE todo_comments(
 
     todo_id UUID NOT NULL REFERENCES todos ON DELETE CASCADE,
     user_id TEXT NOT NULL,
-    content TEXT NOT NULL,
-)
+    content TEXT NOT NULL
+);
 
 CREATE INDEX idx_todo_comments_user_id ON todo_comments(user_id);
 CREATE INDEX idx_todo_comments_todo_id ON todo_comments(todo_id);
