@@ -26,7 +26,7 @@ const (
 )
 
 // Nullable values will be of pointer type --> zero values will be nil
-type todo struct {
+type Todo struct {
 	model.Base
 	UserID       string     `json:"userId" db:"user_id"`
 	Title        string     `json:"title" db:"title"`
