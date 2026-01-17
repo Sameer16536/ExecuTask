@@ -21,6 +21,7 @@ tasks:
   run:
     desc: run the cmd/ExecuTask application
     cmds:
+    - echo 'Running cmd/ExecuTask...'
     - go run ./cmd/ExecuTask
 
   migrations:new:
