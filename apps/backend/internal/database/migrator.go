@@ -9,7 +9,7 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/Sameer1636/go-executask/internal/config"
+	"github.com/Sameer16536/ExecuTask/internal/config"
 
 	"github.com/jackc/pgx/v5"
 	tern "github.com/jackc/tern/v2/migrate"

@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Sameer1636/go-executask/internal/errs"
-	"github.com/Sameer1636/go-executask/internal/server"
+	"github.com/Sameer16536/ExecuTask/internal/errs"
+	"github.com/Sameer16536/ExecuTask/internal/server"
 	"github.com/clerk/clerk-sdk-go/v2"
 	clerkhttp "github.com/clerk/clerk-sdk-go/v2/http"
 	"github.com/labstack/echo/v4"

@@ -1,4 +1,4 @@
-# Go Boilerplate
+# Go ExecuTask
 
 A production-ready monorepo template for building scalable web applications with Go backend and TypeScript frontend. Built with modern best practices, clean architecture, and comprehensive tooling.
 
@@ -18,7 +18,7 @@ A production-ready monorepo template for building scalable web applications with
 ## Project Structure
 
 ```
-go-executask/
+ExecuTask/
 ├── apps/backend/          # Go backend application
 ├── packages/         # Frontend packages (React, Vue, etc.)
 ├── package.json      # Monorepo configuration
@@ -39,8 +39,8 @@ go-executask/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/Sameer1636/go-executask.git
-cd go-executask
+git clone https://github.com/Sameer16536/ExecuTask.git
+cd ExecuTask
 ```
 
 2. Install dependencies:
@@ -100,14 +100,14 @@ bun lint               # Lint all packages
 
 ### Environment Variables
 
-The backend uses environment variables prefixed with `BOILERPLATE_`. Key variables include:
+The backend uses environment variables prefixed with `EXECUTASK_`. Key variables include:
 
-- `BOILERPLATE_DATABASE_*` - PostgreSQL connection settings
-- `BOILERPLATE_SERVER_*` - Server configuration
-- `BOILERPLATE_AUTH_*` - Authentication settings
-- `BOILERPLATE_REDIS_*` - Redis connection
-- `BOILERPLATE_EMAIL_*` - Email service configuration
-- `BOILERPLATE_OBSERVABILITY_*` - Monitoring settings
+- `EXECUTASK_DATABASE_*` - PostgreSQL connection settings
+- `EXECUTASK_SERVER_*` - Server configuration
+- `EXECUTASK_AUTH_*` - Authentication settings
+- `EXECUTASK_REDIS_*` - Redis connection
+- `EXECUTASK_EMAIL_*` - Email service configuration
+- `EXECUTASK_OBSERVABILITY_*` - Monitoring settings
 
 See `apps/backend/.env.example` for a complete list.
 

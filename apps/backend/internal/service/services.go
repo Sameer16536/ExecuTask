@@ -1,9 +1,9 @@
 package service
 
 import (
-	"github.com/Sameer1636/go-executask/internal/lib/job"
-	"github.com/Sameer1636/go-executask/internal/repository"
-	"github.com/Sameer1636/go-executask/internal/server"
+	"github.com/Sameer16536/ExecuTask/internal/lib/job"
+	"github.com/Sameer16536/ExecuTask/internal/repository"
+	"github.com/Sameer16536/ExecuTask/internal/server"
 )
 
 type Services struct {

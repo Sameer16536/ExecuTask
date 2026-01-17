@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/Sameer1636/go-executask/internal/handler"
+	"github.com/Sameer16536/ExecuTask/internal/handler"
 
 	"github.com/labstack/echo/v4"
 )

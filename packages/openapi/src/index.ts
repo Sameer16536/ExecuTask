@@ -26,8 +26,8 @@ const operationMapper: OperationMapper = (operation, appRoute) => ({
   ...operation,
   ...(hasSecurity(appRoute.metadata)
     ? {
-        security: appRoute.metadata.openApiSecurity,
-      }
+      security: appRoute.metadata.openApiSecurity,
+    }
     : {}),
 });
 
@@ -38,8 +38,8 @@ export const OpenAPI = Object.assign(
       openapi: "3.0.2",
       info: {
         version: "1.0.0",
-        title: "Boilerplate REST API - Documentation",
-        description: "Boilerplate REST API - Documentation",
+        title: "ExecuTask REST API - Documentation",
+        description: "ExecuTask REST API - Documentation",
       },
       servers: [
         {

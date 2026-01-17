@@ -3,10 +3,10 @@ package router
 import (
 	"net/http"
 
-	"github.com/Sameer1636/go-executask/internal/handler"
-	"github.com/Sameer1636/go-executask/internal/middleware"
-	"github.com/Sameer1636/go-executask/internal/server"
-	"github.com/Sameer1636/go-executask/internal/service"
+	"github.com/Sameer16536/ExecuTask/internal/handler"
+	"github.com/Sameer16536/ExecuTask/internal/middleware"
+	"github.com/Sameer16536/ExecuTask/internal/server"
+	"github.com/Sameer16536/ExecuTask/internal/service"
 	"github.com/labstack/echo/v4"
 	echoMiddleware "github.com/labstack/echo/v4/middleware"
 	"golang.org/x/time/rate"

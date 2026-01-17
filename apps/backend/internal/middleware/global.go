@@ -3,9 +3,9 @@ package middleware
 import (
 	"net/http"
 
-	"github.com/Sameer1636/go-executask/internal/errs"
-	"github.com/Sameer1636/go-executask/internal/server"
-	"github.com/Sameer1636/go-executask/internal/sqlerr"
+	"github.com/Sameer16536/ExecuTask/internal/errs"
+	"github.com/Sameer16536/ExecuTask/internal/server"
+	"github.com/Sameer16536/ExecuTask/internal/sqlerr"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/pkg/errors"

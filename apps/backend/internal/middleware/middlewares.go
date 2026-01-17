@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"github.com/Sameer1636/go-executask/internal/server"
+	"github.com/Sameer16536/ExecuTask/internal/server"
 	"github.com/newrelic/go-agent/v3/newrelic"
 )
 

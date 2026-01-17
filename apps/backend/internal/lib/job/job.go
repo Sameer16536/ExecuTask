@@ -1,7 +1,7 @@
 package job
 
 import (
-	"github.com/Sameer1636/go-executask/internal/config"
+	"github.com/Sameer16536/ExecuTask/internal/config"
 	"github.com/hibiken/asynq"
 	"github.com/rs/zerolog"
 )

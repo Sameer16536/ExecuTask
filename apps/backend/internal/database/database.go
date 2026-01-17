@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/Sameer1636/go-executask/internal/config"
-	loggerConfig "github.com/Sameer1636/go-executask/internal/logger"
+	"github.com/Sameer16536/ExecuTask/internal/config"
+	loggerConfig "github.com/Sameer16536/ExecuTask/internal/logger"
 	pgxzero "github.com/jackc/pgx-zerolog"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"

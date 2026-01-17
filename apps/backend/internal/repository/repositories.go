@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/Sameer1636/go-executask/internal/server"
+import "github.com/Sameer16536/ExecuTask/internal/server"
 
 type Repositories struct{}
 

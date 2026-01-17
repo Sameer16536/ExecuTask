@@ -3,9 +3,9 @@ package handler
 import (
 	"time"
 
-	"github.com/Sameer1636/go-executask/internal/middleware"
-	"github.com/Sameer1636/go-executask/internal/server"
-	"github.com/Sameer1636/go-executask/internal/validation"
+	"github.com/Sameer16536/ExecuTask/internal/middleware"
+	"github.com/Sameer16536/ExecuTask/internal/server"
+	"github.com/Sameer16536/ExecuTask/internal/validation"
 	"github.com/labstack/echo/v4"
 	"github.com/newrelic/go-agent/v3/integrations/nrpkgerrors"
 	"github.com/newrelic/go-agent/v3/newrelic"

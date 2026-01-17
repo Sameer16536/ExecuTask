@@ -3,9 +3,9 @@ package testing
 import (
 	"time"
 
-	"github.com/Sameer1636/go-executask/internal/config"
-	"github.com/Sameer1636/go-executask/internal/database"
-	"github.com/Sameer1636/go-executask/internal/server"
+	"github.com/Sameer16536/ExecuTask/internal/config"
+	"github.com/Sameer16536/ExecuTask/internal/database"
+	"github.com/Sameer16536/ExecuTask/internal/server"
 	"github.com/rs/zerolog"
 )
 

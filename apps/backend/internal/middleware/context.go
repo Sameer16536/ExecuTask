@@ -3,8 +3,8 @@ package middleware
 import (
 	"context"
 
-	"github.com/Sameer1636/go-executask/internal/logger"
-	"github.com/Sameer1636/go-executask/internal/server"
+	"github.com/Sameer16536/ExecuTask/internal/logger"
+	"github.com/Sameer16536/ExecuTask/internal/server"
 	"github.com/labstack/echo/v4"
 	"github.com/newrelic/go-agent/v3/newrelic"
 	"github.com/rs/zerolog"

@@ -8,14 +8,14 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/Sameer1636/go-executask/internal/config"
-	"github.com/Sameer1636/go-executask/internal/database"
-	"github.com/Sameer1636/go-executask/internal/handler"
-	"github.com/Sameer1636/go-executask/internal/logger"
-	"github.com/Sameer1636/go-executask/internal/repository"
-	"github.com/Sameer1636/go-executask/internal/router"
-	"github.com/Sameer1636/go-executask/internal/server"
-	"github.com/Sameer1636/go-executask/internal/service"
+	"github.com/Sameer16536/ExecuTask/internal/config"
+	"github.com/Sameer16536/ExecuTask/internal/database"
+	"github.com/Sameer16536/ExecuTask/internal/handler"
+	"github.com/Sameer16536/ExecuTask/internal/logger"
+	"github.com/Sameer16536/ExecuTask/internal/repository"
+	"github.com/Sameer16536/ExecuTask/internal/router"
+	"github.com/Sameer16536/ExecuTask/internal/server"
+	"github.com/Sameer16536/ExecuTask/internal/service"
 )
 
 const DefaultContextTimeout = 30

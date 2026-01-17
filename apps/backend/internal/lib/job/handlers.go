@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/Sameer1636/go-executask/internal/config"
-	"github.com/Sameer1636/go-executask/internal/lib/email"
+	"github.com/Sameer16536/ExecuTask/internal/config"
+	"github.com/Sameer16536/ExecuTask/internal/lib/email"
 	"github.com/hibiken/asynq"
 	"github.com/rs/zerolog"
 )

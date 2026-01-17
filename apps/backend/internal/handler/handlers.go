@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"github.com/Sameer1636/go-executask/internal/server"
-	"github.com/Sameer1636/go-executask/internal/service"
+	"github.com/Sameer16536/ExecuTask/internal/server"
+	"github.com/Sameer16536/ExecuTask/internal/service"
 )
 
 type Handlers struct {

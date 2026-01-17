@@ -1,4 +1,4 @@
-module github.com/Sameer1636/go-executask
+module github.com/Sameer16536/ExecuTask
 
 go 1.24.5
 
