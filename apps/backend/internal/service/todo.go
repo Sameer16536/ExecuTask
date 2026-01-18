@@ -2,11 +2,11 @@ package service
 
 import (
 	"github.com/Sameer16536/ExecuTask/internal/errs"
+	"github.com/Sameer16536/ExecuTask/internal/lib/aws"
 	"github.com/Sameer16536/ExecuTask/internal/middleware"
 	"github.com/Sameer16536/ExecuTask/internal/model/todo"
 	"github.com/Sameer16536/ExecuTask/internal/repository"
 	"github.com/Sameer16536/ExecuTask/internal/server"
-	"github.com/Sameer16536/ExecuTask/internal/utils/aws"
 	"github.com/labstack/echo/v4"
 )
 
