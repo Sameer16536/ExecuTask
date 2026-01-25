@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useGetTodoStats, useGetAllTodos } from "@/api/hooks/use-todo-query";
@@ -13,7 +14,10 @@ import {
   Archive,
   Plus,
   ChevronRight,
+  TrendingUp,
 } from "lucide-react";
+import { staggerContainer, listItem } from "@/lib/enhanced-animations";
+import { cn } from "@/lib/utils";
 
 export function DashboardPage() {
   const { data: stats, isLoading: statsLoading } = useGetTodoStats();
@@ -29,91 +33,155 @@ export function DashboardPage() {
       title: "Total Tasks",
       value: stats?.total || 0,
       icon: CheckCircle,
-      color: "text-blue-600",
-      bgColor: "bg-blue-50 dark:bg-blue-950",
+      gradient: "from-blue-500 to-cyan-500",
+      lightBg: "bg-blue-50",
+      darkBg: "dark:bg-blue-950/20",
     },
     {
       title: "Active",
       value: stats?.active || 0,
       icon: Clock,
-      color: "text-green-600",
-      bgColor: "bg-green-50 dark:bg-green-950",
+      gradient: "from-emerald-500 to-teal-500",
+      lightBg: "bg-emerald-50",
+      darkBg: "dark:bg-emerald-950/20",
     },
     {
       title: "Overdue",
       value: stats?.overdue || 0,
       icon: AlertTriangle,
-      color: "text-red-600",
-      bgColor: "bg-red-50 dark:bg-red-950",
+      gradient: "from-red-500 to-rose-500",
+      lightBg: "bg-red-50",
+      darkBg: "dark:bg-red-950/20",
     },
     {
       title: "Completed",
       value: stats?.completed || 0,
       icon: Archive,
-      color: "text-gray-600",
-      bgColor: "bg-gray-50 dark:bg-gray-950",
+      gradient: "from-purple-500 to-pink-500",
+      lightBg: "bg-purple-50",
+      darkBg: "dark:bg-purple-950/20",
     },
   ];
 
   return (
-    <div className="space-y-6">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="space-y-6"
+    >
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <motion.div
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="flex items-center justify-between"
+      >
         <div>
-          <h1 className="text-3xl font-bold">Dashboard</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            Dashboard
+          </h1>
+          <p className="text-muted-foreground mt-1">
             Overview of your tasks and productivity
           </p>
         </div>
         <TodoCreateForm>
-          <Button>
+          <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white border-0 hover:shadow-lg hover:shadow-purple-500/50 transition-all">
             <Plus className="h-4 w-4 mr-2" />
             New Task
           </Button>
         </TodoCreateForm>
-      </div>
+      </motion.div>
 
       {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {statCards.map((stat) => {
+      <motion.div
+        variants={staggerContainer}
+        initial="initial"
+        animate="animate"
+        className="grid gap-4 md:grid-cols-2 lg:grid-cols-4"
+      >
+        {statCards.map((stat, index) => {
           const Icon = stat.icon;
           return (
-            <Card key={stat.title}>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  {stat.title}
-                </CardTitle>
-                <div className={`p-2 rounded-full ${stat.bgColor}`}>
-                  <Icon className={`h-4 w-4 ${stat.color}`} />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">
-                  {statsLoading ? (
-                    <Skeleton className="h-8 w-12" />
-                  ) : (
-                    stat.value
+            <motion.div
+              key={stat.title}
+              variants={listItem}
+              whileHover="hover"
+              initial="rest"
+            >
+              <Card className={cn(
+                "relative overflow-hidden border-0 shadow-lg transition-all duration-300",
+                stat.lightBg,
+                stat.darkBg,
+                "hover:shadow-xl hover:-translate-y-1"
+              )}>
+                {/* Gradient overlay */}
+                <div className={cn(
+                  "absolute inset-0 opacity-10 bg-gradient-to-br",
+                  stat.gradient
+                )} />
+
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 relative z-10">
+                  <CardTitle className="text-sm font-medium text-foreground/80">
+                    {stat.title}
+                  </CardTitle>
+                  <div className={cn(
+                    "p-2 rounded-lg bg-gradient-to-br",
+                    stat.gradient
+                  )}>
+                    <Icon className="h-4 w-4 text-white" />
+                  </div>
+                </CardHeader>
+                <CardContent className="relative z-10">
+                  <div className="text-3xl font-bold">
+                    {statsLoading ? (
+                      <Skeleton className="h-8 w-12" />
+                    ) : (
+                      <motion.span
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                      >
+                        {stat.value}
+                      </motion.span>
+                    )}
+                  </div>
+                  {!statsLoading && stat.value > 0 && (
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.5 }}
+                      className="text-xs text-muted-foreground mt-1 flex items-center gap-1"
+                    >
+                      <TrendingUp className="h-3 w-3" />
+                      <span>Active</span>
+                    </motion.p>
                   )}
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </motion.div>
           );
         })}
-      </div>
+      </motion.div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="grid gap-6 lg:grid-cols-3"
+      >
         {/* Recent Tasks */}
-        <Card className="lg:col-span-2">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Recent Tasks</CardTitle>
+        <Card className="lg:col-span-2 border-border/50 shadow-md hover:shadow-lg transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between border-b border-border/50">
+            <CardTitle className="text-xl">Recent Tasks</CardTitle>
             <Link to="/todos">
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" className="hover:bg-primary/10">
                 View All
                 <ChevronRight className="h-4 w-4 ml-1" />
               </Button>
             </Link>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="pt-6">
             {todosLoading ? (
               <div className="space-y-3">
                 {Array.from({ length: 3 }).map((_, i) => (
@@ -124,17 +192,24 @@ export function DashboardPage() {
                 ))}
               </div>
             ) : recentTodos?.data?.length ? (
-              <div className="space-y-3">
+              <motion.div
+                variants={staggerContainer}
+                initial="initial"
+                animate="animate"
+                className="space-y-3"
+              >
                 {recentTodos.data.slice(0, 5).map((todo) => (
-                  <TodoCard key={todo.id} todo={todo} compact />
+                  <motion.div key={todo.id} variants={listItem}>
+                    <TodoCard todo={todo} compact />
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             ) : (
-              <div className="text-center py-6 text-muted-foreground">
-                <CheckCircle className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                <p>No tasks yet. Create your first task to get started!</p>
+              <div className="text-center py-12">
+                <CheckCircle className="h-16 w-16 mx-auto mb-4 text-muted-foreground/30" />
+                <p className="text-muted-foreground mb-4">No tasks yet. Create your first task to get started!</p>
                 <TodoCreateForm>
-                  <Button variant="outline" className="mt-2">
+                  <Button variant="outline" className="hover:bg-primary/10">
                     <Plus className="h-4 w-4 mr-2" />
                     Create Task
                   </Button>
@@ -145,52 +220,59 @@ export function DashboardPage() {
         </Card>
 
         {/* Categories */}
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Categories</CardTitle>
+        <Card className="border-border/50 shadow-md hover:shadow-lg transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between border-b border-border/50">
+            <CardTitle className="text-xl">Categories</CardTitle>
             <Link to="/categories">
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" className="hover:bg-primary/10">
                 Manage
                 <ChevronRight className="h-4 w-4 ml-1" />
               </Button>
             </Link>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-6">
             {categoriesLoading ? (
               <div className="space-y-2">
                 {Array.from({ length: 3 }).map((_, i) => (
-                  <Skeleton key={i} className="h-8 w-full" />
+                  <Skeleton key={i} className="h-12 w-full" />
                 ))}
               </div>
             ) : categories?.data?.length ? (
-              <div className="space-y-2">
+              <motion.div
+                variants={staggerContainer}
+                initial="initial"
+                animate="animate"
+                className="space-y-2"
+              >
                 {categories.data.slice(0, 6).map((category) => (
-                  <div
+                  <motion.div
                     key={category.id}
-                    className="flex items-center justify-between p-2 rounded-lg border"
+                    variants={listItem}
+                    whileHover={{ scale: 1.02, x: 4 }}
+                    className="flex items-center justify-between p-3 rounded-lg border border-border/50 bg-card hover:bg-accent/50 transition-all cursor-pointer"
                   >
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
                       <div
-                        className="w-3 h-3 rounded-full"
+                        className="w-4 h-4 rounded-full shadow-sm"
                         style={{ backgroundColor: category.color }}
                       />
                       <span className="text-sm font-medium">
                         {category.name}
                       </span>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
                 {categories.data.length > 6 && (
                   <p className="text-xs text-muted-foreground text-center pt-2">
                     +{categories.data.length - 6} more categories
                   </p>
                 )}
-              </div>
+              </motion.div>
             ) : (
-              <div className="text-center py-4 text-muted-foreground">
-                <p className="text-sm">No categories yet</p>
+              <div className="text-center py-8">
+                <p className="text-sm text-muted-foreground mb-4">No categories yet</p>
                 <Link to="/categories">
-                  <Button variant="outline" size="sm" className="mt-2">
+                  <Button variant="outline" size="sm" className="hover:bg-primary/10">
                     Create Category
                   </Button>
                 </Link>
@@ -198,7 +280,7 @@ export function DashboardPage() {
             )}
           </CardContent>
         </Card>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
