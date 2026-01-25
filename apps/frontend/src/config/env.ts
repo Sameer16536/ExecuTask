@@ -1,26 +1,6 @@
-import { z } from "zod";
+export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+export const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || '';
 
-const envVarsSchema = z.object({
-  VITE_CLERK_PUBLISHABLE_KEY: z
-    .string()
-    .min(1, "VITE_CLERK_PUBLISHABLE_KEY is required"),
-  VITE_API_URL: z.url().default("http://localhost:3000"),
-  VITE_ENV: z.enum(["production", "development", "local"]).default("local"),
-});
-
-const parseResult = envVarsSchema.safeParse(process.env);
-
-if (!parseResult.success) {
-  console.error(
-    "❌ Invalid environment variables:",
-    z.treeifyError(parseResult.error),
-  );
-  throw new Error("Invalid environment variables");
+if (!CLERK_PUBLISHABLE_KEY) {
+  throw new Error('Missing Clerk Publishable Key');
 }
-
-const envVars = parseResult.data;
-
-// export individual variables
-export const ENV = envVars.VITE_ENV;
-export const API_URL = envVars.VITE_API_URL;
-export const CLERK_PUBLISHABLE_KEY = envVars.VITE_CLERK_PUBLISHABLE_KEY;
