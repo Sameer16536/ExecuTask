@@ -20,7 +20,7 @@ type Services struct {
 func NewServices(s *server.Server, repos *repository.Repositories) (*Services, error) {
 	authService := NewAuthService(s)
 
-	// s.Job.SetAuthService(authService)
+	s.Job.SetAuthService(authService)
 
 	awsClient, err := aws.NewAWS(s)
 	if err != nil {

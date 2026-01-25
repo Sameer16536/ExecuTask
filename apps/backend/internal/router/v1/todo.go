@@ -28,8 +28,8 @@ func registerTodoRoutes(r *echo.Group, h *handler.TodoHandler, ch *handler.Comme
 	todoComments.GET("", ch.GetCommentsByTodoID)
 
 	// Todo attachments
-	// todoAttachments := dynamicTodo.Group("/attachments")
-	// todoAttachments.POST("", h.UploadTodoAttachment)
-	// todoAttachments.DELETE("/:attachmentId", h.DeleteTodoAttachment)
-	// todoAttachments.GET("/:attachmentId/download", h.GetAttachmentPresignedURL)
+	todoAttachments := dynamicTodo.Group("/attachments")
+	todoAttachments.POST("", h.UploadTodoAttachment)
+	todoAttachments.DELETE("/:attachmentId", h.DeleteTodoAttachment)
+	todoAttachments.GET("/:attachmentId/download", h.GetAttachmentPresignedURL)
 }

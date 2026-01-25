@@ -18,8 +18,9 @@ type Config struct {
 	Auth          AuthConfig           `koanf:"auth" validate:"required"`
 	Redis         RedisConfig          `koanf:"redis" validate:"required"`
 	Integration   IntegrationConfig    `koanf:"integration" validate:"required"`
-	AWS           AWSConfig            `koanf:"aws" validate:"required"`
 	Observability *ObservabilityConfig `koanf:"observability"`
+	AWS           AWSConfig            `koanf:"aws" validate:"required"`
+	Cron          *CronConfig          `koanf:"cron"`
 }
 
 type Primary struct {
@@ -47,7 +48,8 @@ type DatabaseConfig struct {
 	ConnMaxIdleTime int    `koanf:"conn_max_idle_time" validate:"required"`
 }
 type RedisConfig struct {
-	Address string `koanf:"address" validate:"required"`
+	Address  string `koanf:"address" validate:"required"`
+	Password string `koanf:"password"`
 }
 
 type IntegrationConfig struct {
@@ -64,6 +66,90 @@ type AWSConfig struct {
 	SecretAccessKey string `koanf:"secret_access_key" validate:"required"`
 	EndpointURL     string `koanf:"endpoint_url"`
 	S3Bucket        string `koanf:"s3_bucket" validate:"required"`
+}
+
+type CronConfig struct {
+	ArchiveDaysThreshold        int `koanf:"archive_days_threshold"`
+	BatchSize                   int `koanf:"batch_size"`
+	ReminderHours               int `koanf:"reminder_hours"`
+	MaxTodosPerUserNotification int `koanf:"max_todos_per_user_notification"`
+}
+
+func DefaultCronConfig() *CronConfig {
+	return &CronConfig{
+		ArchiveDaysThreshold:        30,
+		BatchSize:                   100,
+		ReminderHours:               24,
+		MaxTodosPerUserNotification: 10,
+	}
+}
+
+func parseMapString(value string) (map[string]string, bool) {
+	if !strings.HasPrefix(value, "map[") || !strings.HasSuffix(value, "]") {
+		return nil, false
+	}
+
+	content := strings.TrimPrefix(value, "map[")
+	content = strings.TrimSuffix(content, "]")
+
+	if content == "" {
+		return make(map[string]string), true
+	}
+
+	result := make(map[string]string)
+
+	i := 0
+	for i < len(content) {
+		keyStart := i
+		for i < len(content) && content[i] != ':' {
+			i++
+		}
+		if i >= len(content) {
+			break
+		}
+
+		key := strings.TrimSpace(content[keyStart:i])
+		i++
+
+		valueStart := i
+		if i+4 <= len(content) && content[i:i+4] == "map[" {
+			bracketCount := 0
+			for i < len(content) {
+				if i+4 <= len(content) && content[i:i+4] == "map[" {
+					bracketCount++
+					i += 4
+				} else if content[i] == ']' {
+					bracketCount--
+					i++
+					if bracketCount == 0 {
+						break
+					}
+				} else {
+					i++
+				}
+			}
+		} else {
+			for i < len(content) && content[i] != ' ' {
+				i++
+			}
+		}
+
+		value := strings.TrimSpace(content[valueStart:i])
+
+		if nestedMap, isNested := parseMapString(value); isNested {
+			for nestedKey, nestedValue := range nestedMap {
+				result[key+"."+nestedKey] = nestedValue
+			}
+		} else {
+			result[key] = value
+		}
+
+		for i < len(content) && content[i] == ' ' {
+			i++
+		}
+	}
+
+	return result, true
 }
 
 func LoadConfig() (*Config, error) {
