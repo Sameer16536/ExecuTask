@@ -46,7 +46,7 @@ export const DueDateReminderEmail = ({
                 src="http://localhost:8080/static/full_logo.png?height=48&width=48"
                 width="48"
                 height="48"
-                alt="Tasker Logo"
+                alt="Executask Logo"
                 className="mx-auto"
               />
               <Heading className="text-2xl font-bold text-gray-800 mt-4">
@@ -88,7 +88,7 @@ export const DueDateReminderEmail = ({
             <Section>
               <Text className="text-gray-700 text-base">
                 💡 <strong>Pro tip:</strong> Stay on top of your tasks by
-                checking your Tasker dashboard regularly and setting realistic
+                checking your Executask dashboard regularly and setting realistic
                 due dates.
               </Text>
             </Section>
@@ -111,7 +111,7 @@ export const DueDateReminderEmail = ({
 
             <Section className="mt-8 text-center">
               <Text className="text-gray-500 text-xs">
-                © {new Date().getFullYear()} Tasker. All rights reserved.
+                © {new Date().getFullYear()} Executask. All rights reserved.
               </Text>
             </Section>
           </Container>
